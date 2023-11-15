@@ -1,0 +1,37 @@
+.box {
+	position: relative;
+	display: block;
+	flex-wrap: wrap;
+	width: 200px;
+}
+
+.inputMain {
+	background-color:	#424242;
+	color: #939393;
+	height: 18px;
+	width: 200px;
+	font-size: 16px;
+	box-sizing:border-box;
+	margin: 2px;
+	padding: 0px 0px 0px 2px;
+	position: relative;
+	border: 2px;
+	border-radius: 2px;
+}
+
+.registerButton {
+	background-color:#424242;
+	color: white;
+	height: 18px;
+	width: 180px;
+	font-size: 14px;
+	margin: 2px 10px 2px 12px;
+	position: relative;
+	border: 2px;
+	border-radius: 4px;
+}
+
+.passwordCheckBox {
+	color: grey;
+	font-size: 8px;
+}
