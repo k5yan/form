@@ -8,6 +8,7 @@ export const RegisterBlock = () => {
 	const {
 		register,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -15,6 +16,7 @@ export const RegisterBlock = () => {
 			password: ``,
 			passwordConfirm: ``,
 		},
+		mode: `all`,
 		resolver: yupResolver(validations),
 	});
 
@@ -23,11 +25,21 @@ export const RegisterBlock = () => {
 	const emailInputError = errors.email?.message;
 	const passwordInputError = errors.password?.message;
 	const passwordConfirmError = errors.passwordConfirm?.message;
+
 	useEffect(() => {
-		if (!emailInputError) {
+		const notNull = watch(`email`) && watch(`password`) && watch(`passwordConfirm`);
+		const withoutErrors =
+			!emailInputError && !passwordInputError && !passwordConfirmError;
+		if (notNull && withoutErrors && registerButtonRef.current) {
 			registerButtonRef.current.focus();
 		}
-	}, [emailInputError]);
+	}, [
+		emailInputError,
+		passwordInputError,
+		passwordConfirmError,
+		registerButtonRef,
+		watch,
+	]);
 
 	const sendData = (data) => {
 		console.log(data);
@@ -47,7 +59,7 @@ export const RegisterBlock = () => {
 					placeholder="Подтвердите пароль"
 					{...register(`passwordConfirm`)}
 				/>
-				<RegButton reference={registerButtonRef} />
+				<RegButton ref={registerButtonRef} />
 				{emailInputError && <div>{emailInputError}</div>}
 				{passwordInputError && <div>{passwordInputError}</div>}
 				{passwordConfirmError && !passwordInputError && (
